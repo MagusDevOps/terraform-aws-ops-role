@@ -3,15 +3,27 @@ data "aws_iam_policy_document" "devops_role_assumable_document" {
     effect  = "Allow"
     actions = ["sts:AssumeRole"]
 
+    resources = [
+      "*",
+    ]
+
+    condition {
+      test     = "StringEqualsIgnoreCase"
+      values   = ["${var.namespace}"]
+      variable = "iam:ResourceTag/${var.namespace_tag_key}"
+    }
+
+    condition {
+      test     = "StringEqualsIgnoreCase"
+      values   = ["${var.prefix}"]
+      variable = "iam:ResourceTag/${var.prefix_tag_key}"
+    }
+
     condition {
       test     = "StringEqualsIgnoreCase"
       values   = ["&{aws:username}"]
       variable = "sts:RolesSessionName"
     }
-
-    resources = [
-      "${aws_iam_role.devops_roles.arn}",
-    ]
   }
 
   statement {
@@ -20,13 +32,13 @@ data "aws_iam_policy_document" "devops_role_assumable_document" {
     resources = ["*"]
 
     condition {
-      test     = "NotIpAddress"
+      test     = "NotIpAddressIfExists"
       values   = "${var.cidr_restrictions}"
       variable = "aws:SourceIp"
     }
 
     condition {
-      test     = "Bool"
+      test     = "BoolIfExists"
       values   = ["false"]
       variable = "aws:ViaAWSService"
     }
