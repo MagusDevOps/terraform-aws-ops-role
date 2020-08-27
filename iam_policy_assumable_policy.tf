@@ -24,6 +24,12 @@ data "aws_iam_policy_document" "devops_role_assumable_document" {
       values   = "${var.cidr_restrictions}"
       variable = "aws:SourceIp"
     }
+
+    condition {
+      test = "Bool"
+      values = ["false"]
+      variable = "aws:ViaAWSService"
+    }
   }
 }
 
