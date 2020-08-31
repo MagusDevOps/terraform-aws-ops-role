@@ -42,7 +42,7 @@ locals {
   policy_path = "/${local.prefix}/${var.namespace}/"
 
   required_tags = "${map(
-    var.prefix_tag_key, local.prefix
+    var.prefix_tag_key, local.prefix,
     var.namespace_tag_key, var.namespace
   )}"
 
