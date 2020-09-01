@@ -9,3 +9,7 @@ output "assumable_role_name" {
 output "assumable_role_arn" {
   value = "${aws_iam_role.devops_role.arn}"
 }
+
+output "group_name" {
+  value = "${aws_iam_group.ops_group.name}"
+}

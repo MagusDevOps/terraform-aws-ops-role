@@ -80,3 +80,4 @@ The following outputs are exported:
 
 ### grant\_assumable\_policy\_arn
 
+### group\_name
