@@ -9,7 +9,7 @@ data "aws_iam_policy_document" "devops_role_assumable_document" {
 
     condition {
       test     = "StringEqualsIgnoreCase"
-      values   = ["${var.namespace}"]
+      values   = ["${local.namespace}"]
       variable = "iam:ResourceTag/${var.namespace_tag_key}"
     }
 
