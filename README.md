@@ -1,5 +1,14 @@
 # terraform-aws-ops-role
 
+## Usage
+```HCL
+module "ops-role" {
+  source            = "MagusDevOps/ops-role/aws"
+  version           = "x.x.x"
+  account_id        = "${var.account_id}"
+  ...
+}
+```
 ## Providers
 
 The following providers are used by this module:
